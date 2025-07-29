@@ -1,3 +1,68 @@
-<html>
-  <a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ" >Looking for this?</a>
+<script>
+  const canvas = document.getElementById('staticCanvas');
+  const ctx = canvas.getContext('2d');
+  
+  // Function to resize the canvas to fill the screen
+  function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+  }
+  
+  // Initial resize and event listener for window resizing
+  resizeCanvas(); 
+  window.addEventListener('resize', resizeCanvas);
+  
+  // Function to draw a single frame of static
+  function drawStatic() {
+    const imageData = ctx.createImageData(canvas.width, canvas.height); 
+    const data = imageData.data;
+  
+    for (let i = 0; i < data.length; i += 4) {
+        const value = Math.floor(Math.random() * 255); // Random grayscale value
+        data[i] = value;     // Red
+        data[i + 1] = value; // Green
+        data[i + 2] = value; // Blue
+        data[i + 3] = 255;   // Alpha (fully opaque)
+    }
+  
+    ctx.putImageData(imageData, 0, 0); // Draw the generated image data to the canvas
+  }
+  
+  // Animate the static effect
+  function animateStatic() {
+    drawStatic(); 
+    requestAnimationFrame(animateStatic); //  Repeatedly call for animation
+  }
+  
+  // Start the animation
+  animateStatic(); 
+</script>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+      html, body {
+      margin: 0;
+      padding: 0;
+      overflow: hidden;
+      }
+      
+      #staticCanvas {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%; 
+      background-color: black;
+      z-index: -100;
+      }
+    </style>
+    <meta charset="UTF-8">
+    <title>TV Static Effect</title>
+    <link rel="stylesheet" href="style.css"> 
+</head>
+<body>
+    <canvas id="staticCanvas"></canvas> 
+</body>
 </html>
