@@ -20,10 +20,13 @@
 
 </head>
 <body>
-    <canvas id="staticCanvas"></canvas> 
+    <canvas id="staticCanvas" ></canvas> 
     <script>
       const canvas = document.getElementById('staticCanvas');
       const ctx = canvas.getContext('2d');
+      
+      ctx.textAlign = "center";
+      ctx.textBaseline = "middle";
       
       // Function to resize the canvas to fill the screen
       function resizeCanvas() {
@@ -41,14 +44,17 @@
         const data = imageData.data;
       
         for (let i = 0; i < data.length; i += 4) {
+        
             const value = Math.floor(Math.random() * 255); // Random grayscale value
-            data[i] = value;     // Red
-            data[i + 1] = value; // Green
-            data[i + 2] = value; // Blue
+            data[i] = value;     // Red          
+            data[i + 1] = value; // Green         
+            data[i + 2] = value; // Blue            
             data[i + 3] = 255;   // Alpha (fully opaque)
         }
       
         ctx.putImageData(imageData, 0, 0); // Draw the generated image data to the canvas
+        ctx.font = 'bold 96px Arial';
+        ctx.fillText('LOST?', (canvas.width / 2)-156, (canvas.height / 2)+32);
       }
       
       // Animate the static effect
@@ -63,6 +69,7 @@
 </body>
 
 </html>
+
 
 
 
